@@ -47,7 +47,9 @@ public class AccountRepository implements Repository<Account> {
         }
 
         T create(final T entity) {
-            data.put(getSequenceId(), entity);
+            final Long sequenceId = getSequenceId();
+            entity.setId(sequenceId);
+            data.put(sequenceId, entity);
             return entity;
         }
 

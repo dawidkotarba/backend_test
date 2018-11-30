@@ -41,7 +41,7 @@ public class Account extends Identifiable {
     public String toString() {
         return "Account{" +
                 "id=" + getId() +
-                "balance=" + balance +
+                ", balance=" + balance +
                 '}';
     }
 }
