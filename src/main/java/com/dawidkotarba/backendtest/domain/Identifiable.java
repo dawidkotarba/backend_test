@@ -1,17 +1,17 @@
 package com.dawidkotarba.backendtest.domain;
 
-import java.util.Objects;
-
 public abstract class Identifiable {
 
-    private final Long id;
-
-    Identifiable(final Long id) {
-        Objects.requireNonNull(id);
-        this.id = id;
-    }
+    private Long id;
 
     public Long getId() {
         return id;
+    }
+
+    public synchronized void setId(final Long id) {
+        if (this.id != null) {
+            throw new IllegalArgumentException("ID has already been set");
+        }
+        this.id = id;
     }
 }

@@ -3,19 +3,10 @@ package com.dawidkotarba.backendtest.domain;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class AccountEntity extends Identifiable {
+public class Account extends Identifiable {
     private BigDecimal balance;
 
-    public static AccountEntity create(final Long id) {
-        return new AccountEntity(id);
-    }
-
-    private AccountEntity(final Long id) {
-        super(id);
-        balance = BigDecimal.ZERO;
-    }
-
-    public AccountEntity withBalance(final BigDecimal balance) {
+    public Account withBalance(final BigDecimal balance) {
         Objects.requireNonNull(balance);
         this.balance = balance;
         return this;
@@ -34,10 +25,10 @@ public class AccountEntity extends Identifiable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof AccountEntity)) {
+        if (!(o instanceof Account)) {
             return false;
         }
-        final AccountEntity that = (AccountEntity) o;
+        final Account that = (Account) o;
         return Objects.equals(getId(), that.getId());
     }
 
@@ -48,7 +39,7 @@ public class AccountEntity extends Identifiable {
 
     @Override
     public String toString() {
-        return "AccountEntity{" +
+        return "Account{" +
                 "id=" + getId() +
                 "balance=" + balance +
                 '}';
