@@ -13,6 +13,8 @@ public interface Repository<T extends Identifiable> {
 
     List<T> findAll();
 
+    long count();
+
     void remove(long id);
 
     void removeAll();

@@ -11,6 +11,8 @@ public interface DataStore<T extends Identifiable> {
 
     Collection<T> getAll();
 
+    long count();
+
     void delete(long id);
 
     void deleteAll();

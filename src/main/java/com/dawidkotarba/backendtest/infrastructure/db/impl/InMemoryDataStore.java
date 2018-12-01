@@ -32,6 +32,11 @@ public class InMemoryDataStore<T extends Identifiable> implements DataStore<T> {
     }
 
     @Override
+    public long count() {
+        return data.size();
+    }
+
+    @Override
     public void delete(final long id) {
         data.remove(id);
     }
