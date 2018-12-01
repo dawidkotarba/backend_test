@@ -12,6 +12,14 @@ class IdentifiableSpec extends Specification {
         entity.getUuid() != null
     }
 
+    def "Should allow to set ID once"() {
+        when:
+        entity.setId(1L)
+
+        then:
+        notThrown IllegalArgumentException
+    }
+
     def "Should not allow reassignment of ID"() {
         given:
         entity.setId(1L)

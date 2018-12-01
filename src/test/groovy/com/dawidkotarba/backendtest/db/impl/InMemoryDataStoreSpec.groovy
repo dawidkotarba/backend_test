@@ -8,8 +8,6 @@ import spock.lang.Specification
 class InMemoryDataStoreSpec extends Specification {
 
     def sut = new InMemoryDataStore()
-
-    def testEntityName = "testEntityName"
     def testEntity = new TestIdentifiableEntity()
 
     def "Should create entity"() {
