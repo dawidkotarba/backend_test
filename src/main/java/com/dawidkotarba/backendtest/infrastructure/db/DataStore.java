@@ -9,6 +9,8 @@ public interface DataStore<T extends Identifiable> {
 
     Collection<T> saveAll(T... entities);
 
+    Collection<T> saveAll(Collection<T> entities);
+
     T get(long id);
 
     Collection<T> getAll();

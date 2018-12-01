@@ -12,7 +12,6 @@ public class TransactionRepository extends AbstractRepository<Transaction> {
 
     public TransactionRepository(final DataStore<Transaction> dataStore) {
         this.dataStore = dataStore;
-
     }
 
     @Override

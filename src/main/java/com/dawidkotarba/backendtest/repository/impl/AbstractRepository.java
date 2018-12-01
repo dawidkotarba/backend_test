@@ -7,19 +7,22 @@ import com.dawidkotarba.backendtest.repository.Repository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public abstract class AbstractRepository<T extends Identifiable> implements Repository<T> {
 
     @Override
     public T save(final T entity) {
-        Objects.requireNonNull(entity, "Entity cannot be null");
         return getDataStore().save(entity);
     }
 
     @Override
     public Collection<T> saveAll(final T... entities) {
+        return getDataStore().saveAll(entities);
+    }
+
+    @Override
+    public Collection<T> saveAll(final Collection<T> entities) {
         return getDataStore().saveAll(entities);
     }
 

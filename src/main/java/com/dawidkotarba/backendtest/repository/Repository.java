@@ -12,6 +12,8 @@ public interface Repository<T extends Identifiable> {
 
     Collection<T> saveAll(T... entities);
 
+    Collection<T> saveAll(Collection<T> entities);
+
     Optional<T> find(long id);
 
     List<T> findAll();
