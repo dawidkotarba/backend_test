@@ -6,6 +6,8 @@ import com.dawidkotarba.backendtest.infrastructure.db.impl.InMemoryDataStore;
 import com.dawidkotarba.backendtest.repository.Repository;
 
 import javax.inject.Singleton;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -25,12 +27,22 @@ public class AccountRepository implements Repository<Account> {
     }
 
     @Override
+    public Optional<Account> find(final long id) {
+        return Optional.ofNullable(dataStore.get(id));
+    }
+
+    @Override
+    public List<Account> findAll() {
+        return new ArrayList<>(dataStore.getAll());
+    }
+
+    @Override
     public void remove(final long id) {
         dataStore.delete(id);
     }
 
     @Override
-    public Optional<Account> find(final long id) {
-        return Optional.ofNullable(dataStore.get(id));
+    public void removeAll() {
+        dataStore.deleteAll();
     }
 }

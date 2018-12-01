@@ -4,6 +4,7 @@ import com.dawidkotarba.backendtest.domain.Identifiable;
 import com.dawidkotarba.backendtest.infrastructure.db.DataStore;
 import io.micronaut.context.annotation.Prototype;
 
+import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -26,8 +27,18 @@ public class InMemoryDataStore<T extends Identifiable> implements DataStore<T> {
     }
 
     @Override
+    public Collection<T> getAll() {
+        return data.values();
+    }
+
+    @Override
     public void delete(final long id) {
         data.remove(id);
+    }
+
+    @Override
+    public void deleteAll() {
+        data.clear();
     }
 
     @Override
