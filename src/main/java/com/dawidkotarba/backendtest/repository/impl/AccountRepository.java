@@ -6,7 +6,7 @@ import com.dawidkotarba.backendtest.infrastructure.db.DataStore;
 import javax.inject.Singleton;
 
 @Singleton
-public class AccountRepository extends AbstractRepository<Account> {
+class AccountRepository extends AbstractRepository<Account> {
 
     private final DataStore<Account> dataStore;
 

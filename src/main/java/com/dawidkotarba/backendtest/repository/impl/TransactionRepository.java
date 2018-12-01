@@ -6,7 +6,7 @@ import com.dawidkotarba.backendtest.infrastructure.db.DataStore;
 import javax.inject.Singleton;
 
 @Singleton
-public class TransactionRepository extends AbstractRepository<Transaction> {
+class TransactionRepository extends AbstractRepository<Transaction> {
 
     private final DataStore<Transaction> dataStore;
 

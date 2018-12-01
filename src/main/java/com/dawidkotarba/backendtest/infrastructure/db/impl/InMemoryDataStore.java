@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 @Prototype
-public class InMemoryDataStore<T extends Identifiable> implements DataStore<T> {
+class InMemoryDataStore<T extends Identifiable> implements DataStore<T> {
     private static final int SEQ_INITIAL_VALUE = 0;
     private final ConcurrentHashMap<Long, T> data = new ConcurrentHashMap<>();
     private final AtomicLong sequence = new AtomicLong(SEQ_INITIAL_VALUE);

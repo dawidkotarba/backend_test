@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class AbstractRepository<T extends Identifiable> implements Repository<T> {
+abstract class AbstractRepository<T extends Identifiable> implements Repository<T> {
 
     @Override
     public T save(final T entity) {
@@ -51,5 +51,5 @@ public abstract class AbstractRepository<T extends Identifiable> implements Repo
         getDataStore().deleteAll();
     }
 
-    public abstract DataStore<T> getDataStore();
+    protected abstract DataStore<T> getDataStore();
 }
