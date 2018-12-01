@@ -4,9 +4,11 @@ import com.dawidkotarba.backendtest.domain.Identifiable;
 import com.dawidkotarba.backendtest.infrastructure.db.DataStore;
 import io.micronaut.context.annotation.Prototype;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 @Prototype
 public class InMemoryDataStore<T extends Identifiable> implements DataStore<T> {
@@ -14,11 +16,16 @@ public class InMemoryDataStore<T extends Identifiable> implements DataStore<T> {
     private final AtomicLong sequence = new AtomicLong(0);
 
     @Override
-    public T create(final T entity) {
+    public T save(final T entity) {
         final Long sequenceId = getSequenceId();
         entity.setId(sequenceId);
         data.put(sequenceId, entity);
         return entity;
+    }
+
+    @Override
+    public Collection<T> saveAll(final T... entities) {
+        return Arrays.stream(entities).map(this::save).collect(Collectors.toList());
     }
 
     @Override

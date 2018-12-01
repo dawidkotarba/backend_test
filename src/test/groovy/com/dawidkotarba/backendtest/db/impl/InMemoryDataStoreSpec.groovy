@@ -16,7 +16,7 @@ class InMemoryDataStoreSpec extends Specification {
         sut.count() == 0
 
         when:
-        def result = sut.create(testEntity)
+        def result = sut.save(testEntity)
 
         then:
         result.getId() != null
@@ -26,13 +26,27 @@ class InMemoryDataStoreSpec extends Specification {
 
     def "Should find entity by id"() {
         given:
-        sut.create(testEntity)
+        sut.save(testEntity)
 
         when:
         def result = sut.get(1)
 
         then:
         result == testEntity
+
+    }
+
+    def "Should find all entities"() {
+        given:
+        def testEntity2 = new TestEntity("testEntity2")
+        def testEntity3 = new TestEntity("testEntity3")
+
+        when:
+        def result = sut.saveAll(testEntity, testEntity2, testEntity3)
+
+        then:
+        sut.count() == 3
+        result.containsAll(testEntity, testEntity2, testEntity3)
 
     }
 
