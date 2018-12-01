@@ -34,14 +34,13 @@ public class Account extends Identifiable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return super.hashCode();
     }
 
     @Override
     public String toString() {
         return "Account{" +
-                "id=" + getId() +
-                ", balance=" + balance +
-                '}';
+                "balance=" + balance +
+                "} " + super.toString();
     }
 }
