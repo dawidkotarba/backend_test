@@ -6,11 +6,11 @@ import com.dawidkotarba.backendtest.infrastructure.db.DataStore;
 import javax.inject.Singleton;
 
 @Singleton
-class TransactionRepository extends AbstractRepository<TransferAuditEntry> {
+class TransferAuditRepository extends AbstractRepository<TransferAuditEntry> {
 
     private final DataStore<TransferAuditEntry> dataStore;
 
-    public TransactionRepository(final DataStore<TransferAuditEntry> dataStore) {
+    public TransferAuditRepository(final DataStore<TransferAuditEntry> dataStore) {
         this.dataStore = dataStore;
     }
 
