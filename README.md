@@ -3,3 +3,6 @@
 # backend_test
 
 Work in progress, please do not consider this as done.
+
+Links:
+- build/reports/tests/test/index.html => test reports

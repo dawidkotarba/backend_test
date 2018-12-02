@@ -1,3 +1,8 @@
+buildscript {
+    dependencies {
+        classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0"
+    }
+}
 plugins {
     id "io.spring.dependency-management" version "1.0.6.RELEASE"
     id "com.github.johnrengelman.shadow" version "4.0.2"
@@ -8,6 +13,8 @@ plugins {
 apply plugin: "application"
 apply plugin: 'groovy'
 apply plugin: "java"
+apply plugin: "jacoco"
+apply plugin: "com.github.kt3k.coveralls"
 
 version "0.1"
 group "com.dawidkotarba.backendtest"
@@ -38,6 +45,21 @@ dependencies {
     testCompile("org.spockframework:spock-core") {
         exclude group: "org.codehaus.groovy", module: "groovy-all"
     }
+}
+
+jacoco {
+    toolVersion = "0.7.9"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+
+tasks.coveralls {
+    dependsOn "check"
 }
 
 shadowJar {
