@@ -1,4 +1,6 @@
-package com.dawidkotarba.backendtest.domain;
+package com.dawidkotarba.backendtest.domain.account;
+
+import com.dawidkotarba.backendtest.domain.Identifiable;
 
 import java.math.BigDecimal;
 import java.util.Objects;

@@ -1,21 +1,21 @@
 package com.dawidkotarba.backendtest.repository.impl;
 
-import com.dawidkotarba.backendtest.domain.Transaction;
+import com.dawidkotarba.backendtest.domain.audit.TransferAuditEntry;
 import com.dawidkotarba.backendtest.infrastructure.db.DataStore;
 
 import javax.inject.Singleton;
 
 @Singleton
-class TransactionRepository extends AbstractRepository<Transaction> {
+class TransactionRepository extends AbstractRepository<TransferAuditEntry> {
 
-    private final DataStore<Transaction> dataStore;
+    private final DataStore<TransferAuditEntry> dataStore;
 
-    public TransactionRepository(final DataStore<Transaction> dataStore) {
+    public TransactionRepository(final DataStore<TransferAuditEntry> dataStore) {
         this.dataStore = dataStore;
     }
 
     @Override
-    public DataStore<Transaction> getDataStore() {
+    public DataStore<TransferAuditEntry> getDataStore() {
         return dataStore;
     }
 }

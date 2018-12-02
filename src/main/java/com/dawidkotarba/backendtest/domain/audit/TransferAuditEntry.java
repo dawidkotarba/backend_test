@@ -1,15 +1,18 @@
-package com.dawidkotarba.backendtest.domain;
+package com.dawidkotarba.backendtest.domain.audit;
+
+import com.dawidkotarba.backendtest.domain.Identifiable;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class Transaction extends Identifiable {
+public class TransferAuditEntry extends Identifiable {
     private final Long senderAccountId;
     private final Long receiverAccountId;
     private final BigDecimal amount;
     private final String title;
+    private TransferStatus status;
 
-    public Transaction(final Long senderAccountId, final Long receiverAccountId, final BigDecimal amount, final String title) {
+    public TransferAuditEntry(final Long senderAccountId, final Long receiverAccountId, final BigDecimal amount, final String title) {
         this.senderAccountId = senderAccountId;
         this.receiverAccountId = receiverAccountId;
         this.amount = amount;
@@ -32,18 +35,27 @@ public class Transaction extends Identifiable {
         return title;
     }
 
+    public TransferAuditEntry withStatus(final TransferStatus status) {
+        this.status = status;
+        return this;
+    }
+
+    public TransferStatus getStatus() {
+        return status;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Transaction)) {
+        if (!(o instanceof TransferAuditEntry)) {
             return false;
         }
         if (!super.equals(o)) {
             return false;
         }
-        final Transaction that = (Transaction) o;
+        final TransferAuditEntry that = (TransferAuditEntry) o;
         return Objects.equals(senderAccountId, that.senderAccountId) &&
                 Objects.equals(receiverAccountId, that.receiverAccountId) &&
                 Objects.equals(amount, that.amount) &&
@@ -57,7 +69,7 @@ public class Transaction extends Identifiable {
 
     @Override
     public String toString() {
-        return "Transaction{" +
+        return "TransferAuditEntry{" +
                 "senderAccountId=" + senderAccountId +
                 ", receiverAccountId=" + receiverAccountId +
                 ", amount=" + amount +

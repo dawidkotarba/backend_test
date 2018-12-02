@@ -1,6 +1,6 @@
 package com.dawidkotarba.backendtest.repository.impl;
 
-import com.dawidkotarba.backendtest.domain.Account;
+import com.dawidkotarba.backendtest.domain.account.Account;
 import com.dawidkotarba.backendtest.infrastructure.db.DataStore;
 
 import javax.inject.Singleton;
