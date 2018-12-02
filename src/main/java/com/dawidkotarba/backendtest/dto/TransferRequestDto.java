@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 // TODO: 02.12.18 validated
-public class TransferDto {
+public class TransferRequestDto {
 
     @NotNull(message = "Sender account ID cannot be null")
     private Long senderAccountId;
@@ -57,10 +57,10 @@ public class TransferDto {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof TransferDto)) {
+        if (!(o instanceof TransferRequestDto)) {
             return false;
         }
-        final TransferDto that = (TransferDto) o;
+        final TransferRequestDto that = (TransferRequestDto) o;
         return Objects.equals(senderAccountId, that.senderAccountId) &&
                 Objects.equals(receiverAccountId, that.receiverAccountId) &&
                 Objects.equals(amount, that.amount) &&
@@ -74,7 +74,7 @@ public class TransferDto {
 
     @Override
     public String toString() {
-        return "TransferDto{" +
+        return "TransferRequestDto{" +
                 "senderAccountId=" + senderAccountId +
                 ", receiverAccountId=" + receiverAccountId +
                 ", amount=" + amount +
