@@ -6,5 +6,6 @@
 
 Work in progress, please do not consider this as done.
 
-Links:
-- build/reports/tests/test/index.html => test reports
+Additional links:
+- https://hub.docker.com/r/dawidkotarba/backend_test - Docker repository
+- build/reports/tests/test/index.html - test reports

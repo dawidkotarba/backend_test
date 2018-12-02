@@ -1,4 +1,4 @@
 package com.dawidkotarba.backendtest.service;
 
-public interface TransactionService {
+public interface TransferAuditService {
 }
