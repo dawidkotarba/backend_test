@@ -3,3 +3,6 @@ jdk:
   - oraclejdk8
 script:
   - ./gradlew clean check
+
+after_success:
+  - python <(curl -s https://raw.githubusercontent.com/TouK/sputnik-ci/master/sputnik-ci.py)
