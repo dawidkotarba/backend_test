@@ -3,7 +3,6 @@ package com.dawidkotarba.backendtest.service.impl;
 import com.dawidkotarba.backendtest.domain.account.Account;
 import com.dawidkotarba.backendtest.domain.audit.TransferAuditEntry;
 import com.dawidkotarba.backendtest.dto.TransferRequestDto;
-import com.dawidkotarba.backendtest.exception.impl.InvalidRequestException;
 import com.dawidkotarba.backendtest.repository.Repository;
 import com.dawidkotarba.backendtest.service.TransferService;
 import com.dawidkotarba.backendtest.service.validator.TransferRequestValidator;
@@ -21,19 +20,16 @@ public class DefaultTransferService implements TransferService {
 
     @Inject
     public DefaultTransferService(@Named("accountRepository") final Repository<Account> accountRepository,
-                                  @Named("transferAuditRepository") final Repository<TransferAuditEntry> transferAuditRepository) {
+                                  @Named("transferAuditRepository") final Repository<TransferAuditEntry> transferAuditRepository,
+                                  final TransferRequestValidator requestValidator) {
         this.accountRepository = accountRepository;
         this.transferAuditRepository = transferAuditRepository;
-        requestValidator = new TransferRequestValidator();
+        this.requestValidator = requestValidator;
     }
 
     @Override
     public void transfer(final TransferRequestDto transferRequestDto) {
-        final boolean validationResult = requestValidator.validate(transferRequestDto);
-
-        if (!validationResult) {
-            throw new InvalidRequestException();
-        }
+        requestValidator.validate(transferRequestDto);
 
         // TODO: 02.12.18 implement
     }

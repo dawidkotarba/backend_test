@@ -6,7 +6,7 @@ public abstract class AbstractApplicationRuntimeException extends RuntimeExcepti
 
     private UUID uuid;
 
-    public AbstractApplicationRuntimeException() {
+    private AbstractApplicationRuntimeException() {
         super();
         init();
     }
