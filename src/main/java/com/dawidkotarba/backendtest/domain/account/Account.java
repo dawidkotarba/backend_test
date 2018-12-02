@@ -4,22 +4,29 @@ import com.dawidkotarba.backendtest.domain.Identifiable;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Account extends Identifiable {
-    private BigDecimal balance;
+    private AtomicReference<BigDecimal> balance;
 
     public Account withBalance(final BigDecimal balance) {
         Objects.requireNonNull(balance);
-        this.balance = balance;
+        this.balance = new AtomicReference<>(balance);
         return this;
     }
 
     public BigDecimal getBalance() {
-        return balance;
+        return balance.get();
     }
 
     public void add(final BigDecimal amount) {
-        balance.add(amount);
+        while (true) {
+            final BigDecimal currentBalance = getBalance();
+            final BigDecimal updatedBalance = currentBalance.add(amount);
+            if (balance.compareAndSet(currentBalance, updatedBalance)) {
+                return;
+            }
+        }
     }
 
     @Override
