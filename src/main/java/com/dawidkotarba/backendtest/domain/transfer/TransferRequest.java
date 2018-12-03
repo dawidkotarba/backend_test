@@ -42,13 +42,17 @@ public class TransferRequest extends Identifiable {
         return this;
     }
 
+    public TransferStatus getStatus() {
+        return status;
+    }
+
     public TransferRequest withTimestamp(final LocalDateTime timestamp) {
         this.timestamp = timestamp;
         return this;
     }
 
-    public TransferStatus getStatus() {
-        return status;
+    public LocalDateTime getTimestamp() {
+        return timestamp;
     }
 
     @Override
