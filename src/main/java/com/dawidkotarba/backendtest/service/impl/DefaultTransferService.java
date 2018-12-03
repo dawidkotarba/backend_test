@@ -47,7 +47,7 @@ class DefaultTransferService implements TransferService {
         synchronized (senderAccount) {
             if (senderAccount.isAmountAvailable(transferAmount)) {
                 senderAccount.add(transferAmount.negate());
-                transferRepository.save(transferRequest.withStatus(TransferStatus.AMOUNT_SUBSTRACTED_FROM_SENDER));
+                transferRepository.save(transferRequest.withStatus(TransferStatus.AMOUNT_SUBTRACTED_FROM_SENDER));
             } else {
                 transferRepository.save(transferRequest.withStatus(TransferStatus.INSUFFICIENT_AMOUNT));
                 throw new InvalidRequestException("Insufficient amount"); // TODO: 03.12.18 more biz exception here
