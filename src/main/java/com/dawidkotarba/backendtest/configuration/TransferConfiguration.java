@@ -8,8 +8,8 @@ import java.math.BigDecimal;
 public class TransferConfiguration {
     private final BigDecimal minTransferAmount = new BigDecimal("0.01");
     private final BigDecimal maxTransferAmount = new BigDecimal("100000000");
-    private final int maxTitleLength = 200;
     private final int scale = 2;
+    private final int maxTitleLength = 200;
 
     public BigDecimal getMinTransferAmount() {
         return minTransferAmount;
@@ -19,11 +19,11 @@ public class TransferConfiguration {
         return maxTransferAmount;
     }
 
-    public int getMaxTitleLength() {
-        return maxTitleLength;
-    }
-
     public int getScale() {
         return scale;
+    }
+
+    public int getMaxTitleLength() {
+        return maxTitleLength;
     }
 }

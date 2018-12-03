@@ -23,11 +23,12 @@ class TransferRequestValidatorSpec extends Specification {
         thrown expectedException
 
         where:
-        transferRequest                                      | expectedException
-        new TransferRequest(-1L, 1L, BigDecimal.ONE, "test") | InvalidRequestException
-        new TransferRequest(1L, -1L, BigDecimal.ONE, "test") | InvalidRequestException
-        new TransferRequest(1L, 1L, BigDecimal.ZERO, "test") | InvalidRequestException
-        new TransferRequest(1L, 1L, BigDecimal.ONE, "")      | InvalidRequestException
+        transferRequest                                             | expectedException
+        new TransferRequest(-1L, 1L, BigDecimal.ONE, "test")        | InvalidRequestException
+        new TransferRequest(1L, -1L, BigDecimal.ONE, "test")        | InvalidRequestException
+        new TransferRequest(1L, 1L, BigDecimal.ZERO, "test")        | InvalidRequestException
+        new TransferRequest(1L, 1L, BigDecimal.ONE, "")             | InvalidRequestException
+        new TransferRequest(1L, 1L, new BigDecimal("1.000001"), "") | InvalidRequestException
     }
 
     def "Should not throw any exception for a valid transfer request"() {

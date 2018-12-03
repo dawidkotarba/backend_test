@@ -7,7 +7,9 @@ import com.dawidkotarba.backendtest.facade.TransferFacade;
 import com.dawidkotarba.backendtest.service.TransferService;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class DefaultTransferFacade implements TransferFacade {
 
     private final TransferService transferService;

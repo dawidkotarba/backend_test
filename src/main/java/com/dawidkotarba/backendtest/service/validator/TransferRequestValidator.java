@@ -50,7 +50,8 @@ public class TransferRequestValidator {
 
     private boolean validateTransferAmount(final BigDecimal transferAmount) {
         return transferAmount.compareTo(configuration.getMinTransferAmount()) >= 0
-                && transferAmount.compareTo(configuration.getMaxTransferAmount()) <= 0;
+                && transferAmount.compareTo(configuration.getMaxTransferAmount()) <= 0
+                && transferAmount.scale() <= configuration.getScale();
     }
 
     private boolean validateTitle(final String title) {
