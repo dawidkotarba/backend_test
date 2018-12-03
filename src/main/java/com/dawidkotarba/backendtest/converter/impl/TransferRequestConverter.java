@@ -3,10 +3,15 @@ package com.dawidkotarba.backendtest.converter.impl;
 import com.dawidkotarba.backendtest.converter.Converter;
 import com.dawidkotarba.backendtest.domain.transfer.TransferRequest;
 import com.dawidkotarba.backendtest.dto.TransferRequestDto;
-
-import java.time.LocalDateTime;
+import com.dawidkotarba.backendtest.service.TimeService;
 
 public class TransferRequestConverter implements Converter<TransferRequestDto, TransferRequest> {
+
+    private final TimeService timeService;
+
+    public TransferRequestConverter(final TimeService timeService) {
+        this.timeService = timeService;
+    }
 
     @Override
     public TransferRequest convert(final TransferRequestDto dto) {
@@ -14,6 +19,6 @@ public class TransferRequestConverter implements Converter<TransferRequestDto, T
                 dto.getReceiverAccountId(),
                 dto.getAmount(),
                 dto.getTitle())
-                .withTimestamp(LocalDateTime.now());
+                .withTimestamp(timeService.getCurrentTime());
     }
 }
