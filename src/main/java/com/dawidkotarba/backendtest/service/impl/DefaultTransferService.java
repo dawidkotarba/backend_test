@@ -43,7 +43,7 @@ class DefaultTransferService implements TransferService {
 
         transferRepository.save(transferRequest.withStatus(TransferStatus.STARTED));
 
-        // pessimistic lock for transfer amount substraction
+        // pessimistic lock for transfer amount subtraction
         synchronized (senderAccount) {
             if (senderAccount.isAmountAvailable(transferAmount)) {
                 senderAccount.add(transferAmount.negate());
