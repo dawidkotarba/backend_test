@@ -1,8 +1,9 @@
-package com.dawidkotarba.backendtest.service.validator;
+package com.dawidkotarba.backendtest.service.validator.impl;
 
 import com.dawidkotarba.backendtest.configuration.TransferConfiguration;
 import com.dawidkotarba.backendtest.domain.transfer.TransferRequest;
 import com.dawidkotarba.backendtest.exception.impl.InvalidRequestException;
+import com.dawidkotarba.backendtest.service.validator.Validator;
 import io.micronaut.core.util.StringUtils;
 
 import javax.inject.Inject;
@@ -13,7 +14,7 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 @Singleton
-public class TransferRequestValidator {
+public class TransferRequestValidator implements Validator<TransferRequest> {
 
     private final TransferConfiguration configuration;
 
@@ -22,6 +23,7 @@ public class TransferRequestValidator {
         this.configuration = configuration;
     }
 
+    @Override
     public void validate(final TransferRequest request) {
         final boolean isFilled = Stream.of(request, request.getSenderAccountId(), request.getReceiverAccountId(),
                 request.getAmount(), request.getTitle())

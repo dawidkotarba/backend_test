@@ -3,6 +3,7 @@ package com.dawidkotarba.backendtest.service.validator
 import com.dawidkotarba.backendtest.configuration.TransferConfiguration
 import com.dawidkotarba.backendtest.domain.transfer.TransferRequest
 import com.dawidkotarba.backendtest.exception.impl.InvalidRequestException
+import com.dawidkotarba.backendtest.service.validator.impl.TransferRequestValidator
 import spock.lang.Specification
 
 class TransferRequestValidatorSpec extends Specification {

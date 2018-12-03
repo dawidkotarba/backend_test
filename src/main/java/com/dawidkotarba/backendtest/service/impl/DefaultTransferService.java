@@ -6,7 +6,7 @@ import com.dawidkotarba.backendtest.domain.transfer.TransferStatus;
 import com.dawidkotarba.backendtest.exception.impl.InvalidRequestException;
 import com.dawidkotarba.backendtest.repository.Repository;
 import com.dawidkotarba.backendtest.service.TransferService;
-import com.dawidkotarba.backendtest.service.validator.TransferRequestValidator;
+import com.dawidkotarba.backendtest.service.validator.Validator;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -18,12 +18,12 @@ class DefaultTransferService implements TransferService {
 
     private final Repository<Account> accountRepository;
     private final Repository<TransferRequest> transferRepository;
-    private final TransferRequestValidator requestValidator;
+    private final Validator<TransferRequest> requestValidator;
 
     @Inject
     public DefaultTransferService(@Named("accountRepository") final Repository<Account> accountRepository,
                                   @Named("transferRepository") final Repository<TransferRequest> transferRepository,
-                                  final TransferRequestValidator requestValidator) {
+                                  final Validator<TransferRequest> requestValidator) {
         this.accountRepository = accountRepository;
         this.transferRepository = transferRepository;
         this.requestValidator = requestValidator;
