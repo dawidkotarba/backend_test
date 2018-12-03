@@ -6,7 +6,7 @@ import javax.inject.Singleton;
 import java.time.LocalDateTime;
 
 @Singleton
-public class DefaultTimeService implements TimeService {
+class DefaultTimeService implements TimeService {
 
     @Override
     public LocalDateTime getCurrentTime() {

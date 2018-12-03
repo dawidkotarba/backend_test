@@ -12,7 +12,7 @@ import javax.validation.Valid;
 
 @Validated
 @Controller("/api")
-public class TransferController {
+class TransferController {
 
     private final TransferFacade transferFacade;
 

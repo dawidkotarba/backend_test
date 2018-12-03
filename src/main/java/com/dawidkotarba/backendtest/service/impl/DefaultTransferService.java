@@ -14,7 +14,7 @@ import javax.inject.Singleton;
 import java.math.BigDecimal;
 
 @Singleton
-public class DefaultTransferService implements TransferService {
+class DefaultTransferService implements TransferService {
 
     private final Repository<Account> accountRepository;
     private final Repository<TransferRequest> transferRepository;

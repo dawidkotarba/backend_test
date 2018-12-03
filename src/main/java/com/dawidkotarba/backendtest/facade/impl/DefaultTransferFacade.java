@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public class DefaultTransferFacade implements TransferFacade {
+class DefaultTransferFacade implements TransferFacade {
 
     private final TransferService transferService;
     private final TimeService timeService;
