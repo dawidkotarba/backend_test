@@ -23,11 +23,11 @@ public class TransferRequestValidator {
     }
 
     public void validate(final TransferRequest request) {
-        final boolean isFiled = Stream.of(request, request.getSenderAccountId(), request.getReceiverAccountId(),
+        final boolean isFilled = Stream.of(request, request.getSenderAccountId(), request.getReceiverAccountId(),
                 request.getAmount(), request.getTitle())
                 .allMatch(Objects::nonNull);
 
-        if (!isFiled) {
+        if (!isFilled) {
             throw new InvalidRequestException("One or more fields are null.");
         }
 
