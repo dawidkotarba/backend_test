@@ -45,7 +45,7 @@ public class DefaultTransferService implements TransferService {
 
         // pessimistic lock for transfer amount substraction
         synchronized (senderAccount) {
-            if (isAmountAvailable(senderAccount.getBalance(), transferAmount)) {
+            if (senderAccount.isAmountAvailable(transferAmount)) {
                 senderAccount.add(transferAmount.negate());
                 transferRepository.save(transferRequest.withStatus(TransferStatus.AMOUNT_SUBSTRACTED_FROM_SENDER));
             } else {
@@ -57,9 +57,5 @@ public class DefaultTransferService implements TransferService {
         // optimistic for transfer amount addition
         receiverAccount.add(transferAmount);
         transferRepository.save(transferRequest.withStatus(TransferStatus.SUCCESS));
-    }
-
-    private boolean isAmountAvailable(final BigDecimal currentBalance, final BigDecimal transferAmount) {
-        return currentBalance.compareTo(transferAmount) >= 0;
     }
 }

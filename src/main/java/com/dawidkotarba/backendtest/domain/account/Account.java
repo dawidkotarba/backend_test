@@ -29,6 +29,10 @@ public class Account extends Identifiable {
         }
     }
 
+    public boolean isAmountAvailable(final BigDecimal amount) {
+        return getBalance().compareTo(amount) >= 0;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
