@@ -6,7 +6,7 @@ import spock.lang.Specification
 
 class AbstractRepositorySpec extends Specification {
 
-    def mockDataStore = Mock(DataStore.class)
+    def mockDataStore = Mock(DataStore)
     def testEntity = new TestIdentifiableEntity()
 
     def sut = new AbstractRepository<TestIdentifiableEntity>() {

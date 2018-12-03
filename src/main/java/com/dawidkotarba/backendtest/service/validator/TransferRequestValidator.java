@@ -1,8 +1,9 @@
 package com.dawidkotarba.backendtest.service.validator;
 
 import com.dawidkotarba.backendtest.configuration.TransferConfiguration;
-import com.dawidkotarba.backendtest.dto.TransferRequestDto;
+import com.dawidkotarba.backendtest.domain.transfer.TransferRequest;
 import com.dawidkotarba.backendtest.exception.impl.InvalidRequestException;
+import io.micronaut.core.util.StringUtils;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -21,7 +22,7 @@ public class TransferRequestValidator {
         this.configuration = configuration;
     }
 
-    public void validate(final TransferRequestDto request) {
+    public void validate(final TransferRequest request) {
         final boolean isFiled = Stream.of(request, request.getSenderAccountId(), request.getReceiverAccountId(),
                 request.getAmount(), request.getTitle())
                 .allMatch(Objects::nonNull);
@@ -38,7 +39,9 @@ public class TransferRequestValidator {
             throw new InvalidRequestException("Invalid transfer amount.");
         }
 
-        // TODO: 02.12.18 Finish this
+        if (!validateTitle(request.getTitle())) {
+            throw new InvalidRequestException("Incorrect transfer title.");
+        }
     }
 
     private boolean validateAccountIds(final Long... accountIds) {
@@ -48,5 +51,9 @@ public class TransferRequestValidator {
     private boolean validateTransferAmount(final BigDecimal transferAmount) {
         return transferAmount.compareTo(configuration.getMinTransferAmount()) >= 0
                 && transferAmount.compareTo(configuration.getMaxTransferAmount()) <= 0;
+    }
+
+    private boolean validateTitle(final String title) {
+        return !StringUtils.isEmpty(title) && title.length() <= configuration.getMaxTitleLength();
     }
 }

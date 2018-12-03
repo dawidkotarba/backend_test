@@ -1,8 +1,8 @@
 package com.dawidkotarba.backendtest.service;
 
-import com.dawidkotarba.backendtest.dto.TransferRequestDto;
+import com.dawidkotarba.backendtest.domain.transfer.TransferRequest;
 
 public interface TransferService {
 
-    void transfer(TransferRequestDto transferRequestDto);
+    void transfer(TransferRequest transferRequestDto);
 }

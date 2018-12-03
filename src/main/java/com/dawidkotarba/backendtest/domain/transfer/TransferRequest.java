@@ -1,18 +1,20 @@
-package com.dawidkotarba.backendtest.domain.audit;
+package com.dawidkotarba.backendtest.domain.transfer;
 
 import com.dawidkotarba.backendtest.domain.Identifiable;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class TransferAuditEntry extends Identifiable {
+public class TransferRequest extends Identifiable {
     private final Long senderAccountId;
     private final Long receiverAccountId;
     private final BigDecimal amount;
     private final String title;
     private TransferStatus status;
+    private LocalDateTime timestamp;
 
-    public TransferAuditEntry(final Long senderAccountId, final Long receiverAccountId, final BigDecimal amount, final String title) {
+    public TransferRequest(final Long senderAccountId, final Long receiverAccountId, final BigDecimal amount, final String title) {
         this.senderAccountId = senderAccountId;
         this.receiverAccountId = receiverAccountId;
         this.amount = amount;
@@ -35,8 +37,13 @@ public class TransferAuditEntry extends Identifiable {
         return title;
     }
 
-    public TransferAuditEntry withStatus(final TransferStatus status) {
+    public TransferRequest withStatus(final TransferStatus status) {
         this.status = status;
+        return this;
+    }
+
+    public TransferRequest withTimestamp(final LocalDateTime timestamp) {
+        this.timestamp = timestamp;
         return this;
     }
 
@@ -49,13 +56,13 @@ public class TransferAuditEntry extends Identifiable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof TransferAuditEntry)) {
+        if (!(o instanceof TransferRequest)) {
             return false;
         }
         if (!super.equals(o)) {
             return false;
         }
-        final TransferAuditEntry that = (TransferAuditEntry) o;
+        final TransferRequest that = (TransferRequest) o;
         return Objects.equals(senderAccountId, that.senderAccountId) &&
                 Objects.equals(receiverAccountId, that.receiverAccountId) &&
                 Objects.equals(amount, that.amount) &&
@@ -69,7 +76,7 @@ public class TransferAuditEntry extends Identifiable {
 
     @Override
     public String toString() {
-        return "TransferAuditEntry{" +
+        return "TransferRequest{" +
                 "senderAccountId=" + senderAccountId +
                 ", receiverAccountId=" + receiverAccountId +
                 ", amount=" + amount +

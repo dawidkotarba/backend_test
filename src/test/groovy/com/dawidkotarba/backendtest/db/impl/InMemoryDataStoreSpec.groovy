@@ -18,7 +18,7 @@ class InMemoryDataStoreSpec extends Specification {
         def result = sut.save(testEntity)
 
         then:
-        result.getId() != null
+        result.id != null
         and:
         sut.count() == 1
     }

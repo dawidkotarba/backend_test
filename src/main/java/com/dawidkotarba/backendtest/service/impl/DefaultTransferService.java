@@ -1,8 +1,7 @@
 package com.dawidkotarba.backendtest.service.impl;
 
 import com.dawidkotarba.backendtest.domain.account.Account;
-import com.dawidkotarba.backendtest.domain.audit.TransferAuditEntry;
-import com.dawidkotarba.backendtest.dto.TransferRequestDto;
+import com.dawidkotarba.backendtest.domain.transfer.TransferRequest;
 import com.dawidkotarba.backendtest.repository.Repository;
 import com.dawidkotarba.backendtest.service.TransferService;
 import com.dawidkotarba.backendtest.service.validator.TransferRequestValidator;
@@ -15,21 +14,21 @@ import javax.inject.Singleton;
 public class DefaultTransferService implements TransferService {
 
     private final Repository<Account> accountRepository;
-    private final Repository<TransferAuditEntry> transferAuditRepository;
+    private final Repository<TransferRequest> transferRepository;
     private final TransferRequestValidator requestValidator;
 
     @Inject
     public DefaultTransferService(@Named("accountRepository") final Repository<Account> accountRepository,
-                                  @Named("transferAuditRepository") final Repository<TransferAuditEntry> transferAuditRepository,
+                                  @Named("transferRepository") final Repository<TransferRequest> transferRepository,
                                   final TransferRequestValidator requestValidator) {
         this.accountRepository = accountRepository;
-        this.transferAuditRepository = transferAuditRepository;
+        this.transferRepository = transferRepository;
         this.requestValidator = requestValidator;
     }
 
     @Override
-    public void transfer(final TransferRequestDto transferRequestDto) {
-        requestValidator.validate(transferRequestDto);
+    public void transfer(final TransferRequest transferRequest) {
+        requestValidator.validate(transferRequest);
 
         // TODO: 02.12.18 implement
     }
