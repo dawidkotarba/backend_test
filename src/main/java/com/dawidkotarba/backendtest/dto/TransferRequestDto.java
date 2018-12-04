@@ -60,10 +60,10 @@ public class TransferRequestDto {
             return false;
         }
         final TransferRequestDto that = (TransferRequestDto) o;
-        return Objects.equals(senderAccountId, that.senderAccountId) &&
-                Objects.equals(receiverAccountId, that.receiverAccountId) &&
-                Objects.equals(amount, that.amount) &&
-                Objects.equals(title, that.title);
+        return Objects.equals(senderAccountId, that.senderAccountId)
+                && Objects.equals(receiverAccountId, that.receiverAccountId)
+                && Objects.equals(amount, that.amount)
+                && Objects.equals(title, that.title);
     }
 
     @Override
@@ -73,11 +73,11 @@ public class TransferRequestDto {
 
     @Override
     public String toString() {
-        return "TransferRequestDto{" +
-                "senderAccountId=" + senderAccountId +
-                ", receiverAccountId=" + receiverAccountId +
-                ", amount=" + amount +
-                ", title='" + title + '\'' +
-                '}';
+        return "TransferRequestDto{"
+                + "senderAccountId=" + senderAccountId
+                + ", receiverAccountId=" + receiverAccountId
+                + ", amount=" + amount
+                + ", title='" + title + '\''
+                + '}';
     }
 }

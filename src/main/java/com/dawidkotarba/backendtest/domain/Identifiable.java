@@ -1,9 +1,10 @@
 package com.dawidkotarba.backendtest.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-public abstract class Identifiable {
+public class Identifiable implements Serializable {
 
     private Long id;
     private final UUID uuid;
@@ -46,9 +47,9 @@ public abstract class Identifiable {
 
     @Override
     public String toString() {
-        return "Identifiable{" +
-                "id=" + id +
-                ", uuid=" + uuid +
-                '}';
+        return "Identifiable{"
+                + "id=" + id
+                + ", uuid=" + uuid
+                + '}';
     }
 }

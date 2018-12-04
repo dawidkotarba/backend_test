@@ -67,10 +67,10 @@ public class TransferRequest extends Identifiable {
             return false;
         }
         final TransferRequest that = (TransferRequest) o;
-        return Objects.equals(senderAccountId, that.senderAccountId) &&
-                Objects.equals(receiverAccountId, that.receiverAccountId) &&
-                Objects.equals(amount, that.amount) &&
-                Objects.equals(title, that.title);
+        return Objects.equals(senderAccountId, that.senderAccountId)
+                && Objects.equals(receiverAccountId, that.receiverAccountId)
+                && Objects.equals(amount, that.amount)
+                && Objects.equals(title, that.title);
     }
 
     @Override
@@ -80,11 +80,11 @@ public class TransferRequest extends Identifiable {
 
     @Override
     public String toString() {
-        return "TransferRequest{" +
-                "senderAccountId=" + senderAccountId +
-                ", receiverAccountId=" + receiverAccountId +
-                ", amount=" + amount +
-                ", title='" + title + '\'' +
-                "} " + super.toString();
+        return "TransferRequest{"
+                + "senderAccountId=" + senderAccountId
+                + ", receiverAccountId=" + receiverAccountId
+                + ", amount=" + amount
+                + ", title='" + title + '\''
+                + "} " + super.toString();
     }
 }

@@ -52,8 +52,8 @@ public class Account extends Identifiable {
 
     @Override
     public String toString() {
-        return "Account{" +
-                "balance=" + balance +
-                "} " + super.toString();
+        return "Account{"
+                + "balance=" + balance
+                + "} " + super.toString();
     }
 }

@@ -14,6 +14,7 @@ apply plugin: "application"
 apply plugin: 'groovy'
 apply plugin: "java"
 apply plugin: "jacoco"
+apply plugin: "checkstyle"
 apply plugin: "com.github.kt3k.coveralls"
 
 version "0.1"
@@ -46,6 +47,10 @@ dependencies {
     testCompile("org.spockframework:spock-core") {
         exclude group: "org.codehaus.groovy", module: "groovy-all"
     }
+}
+
+checkstyle {
+    toolVersion = "6.5"
 }
 
 jacoco {
