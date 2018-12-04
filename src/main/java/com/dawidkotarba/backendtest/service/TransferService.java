@@ -4,5 +4,5 @@ import com.dawidkotarba.backendtest.domain.transfer.TransferRequest;
 
 public interface TransferService {
 
-    void transfer(TransferRequest transferRequestDto);
+    Long transfer(TransferRequest transferRequestDto);
 }

@@ -24,7 +24,7 @@ class TransferController {
     }
 
     @Post("/transfer")
-    public void transferAmount(@Valid final TransferRequestDto request) {
-        transferFacade.transfer(request);
+    public Long transferAmount(@Valid final TransferRequestDto request) {
+        return transferFacade.transfer(request);
     }
 }

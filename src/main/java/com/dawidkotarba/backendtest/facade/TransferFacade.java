@@ -4,6 +4,6 @@ import com.dawidkotarba.backendtest.dto.TransferRequestDto;
 
 public interface TransferFacade {
 
-    void transfer(TransferRequestDto transferRequestDto);
+    Long transfer(TransferRequestDto transferRequestDto);
 
 }

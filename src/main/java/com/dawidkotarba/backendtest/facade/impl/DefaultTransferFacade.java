@@ -23,9 +23,9 @@ class DefaultTransferFacade implements TransferFacade {
     }
 
     @Override
-    public void transfer(final TransferRequestDto transferRequestDto) {
+    public Long transfer(final TransferRequestDto transferRequestDto) {
         final TransferRequestConverter converter = new TransferRequestConverter(timeService);
         final TransferRequest transferRequest = converter.convert(transferRequestDto);
-        transferService.transfer(transferRequest);
+        return transferService.transfer(transferRequest);
     }
 }

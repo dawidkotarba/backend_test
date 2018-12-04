@@ -31,7 +31,7 @@ class DefaultTransferService implements TransferService {
     }
 
     @Override
-    public void transfer(final TransferRequest transferRequest) {
+    public Long transfer(final TransferRequest transferRequest) {
         requestValidator.validate(transferRequest);
 
         final Long senderAccountId = transferRequest.getSenderAccountId();
@@ -54,7 +54,8 @@ class DefaultTransferService implements TransferService {
                 transferRepository.save(transferRequest.withStatus(TransferStatus.AMOUNT_SUBTRACTED_FROM_SENDER));
             } else {
                 transferRepository.save(transferRequest.withStatus(TransferStatus.INSUFFICIENT_AMOUNT));
-                throw new InsufficientAmountException("Sender [" + senderAccountId + "] does not have a sufficient amount to transfer.");
+                throw new InsufficientAmountException("Sender [" + senderAccountId + "] does not have a sufficient amount to transfer."
+                        + "Transfer reference: []" + transferRequest.getId());
             }
         }
 
@@ -62,5 +63,6 @@ class DefaultTransferService implements TransferService {
         receiverAccount.add(transferAmount);
         accountRepository.save(receiverAccount);
         transferRepository.save(transferRequest.withStatus(TransferStatus.TRANSFERRED));
+        return transferRequest.getId();
     }
 }
