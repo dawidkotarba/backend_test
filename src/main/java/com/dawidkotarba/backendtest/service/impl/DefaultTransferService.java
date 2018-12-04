@@ -36,7 +36,7 @@ class DefaultTransferService implements TransferService {
 
         final Long senderAccountId = transferRequest.getSenderAccountId();
         final Account senderAccount = accountRepository.find(senderAccountId)
-                .orElseThrow(() -> new AccountNotFoundException("Sender's account [ " + senderAccountId + "] cannot be found."));
+                .orElseThrow(() -> new AccountNotFoundException("Sender's account [" + senderAccountId + "] cannot be found."));
 
         final Long receiverAccountId = transferRequest.getReceiverAccountId();
         final Account receiverAccount = accountRepository.find(receiverAccountId)

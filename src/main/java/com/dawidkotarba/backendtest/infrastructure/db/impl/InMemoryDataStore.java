@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -42,12 +41,6 @@ class InMemoryDataStore<T extends Identifiable> implements DataStore<T> {
     }
 
     @Override
-    public Collection<T> saveAll(final T... entities) {
-        Objects.requireNonNull(entities, "Entities cannot be null");
-        return Arrays.stream(entities).map(this::save).collect(Collectors.toList());
-    }
-
-    @Override
     public Collection<T> saveAll(final Collection<T> entities) {
         Objects.requireNonNull(entities, "Entities cannot be null");
         return entities.stream().map(this::save).collect(Collectors.toList());
@@ -59,23 +52,8 @@ class InMemoryDataStore<T extends Identifiable> implements DataStore<T> {
     }
 
     @Override
-    public Collection<T> getAll() {
-        return data.values();
-    }
-
-    @Override
     public long count() {
         return data.size();
-    }
-
-    @Override
-    public void delete(final long id) {
-        data.remove(id);
-    }
-
-    @Override
-    public void deleteAll() {
-        data.clear();
     }
 
     @Override

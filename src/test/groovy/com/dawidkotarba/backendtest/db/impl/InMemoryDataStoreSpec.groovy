@@ -47,30 +47,6 @@ class InMemoryDataStoreSpec extends Specification {
         result.containsAll(entities)
     }
 
-    def "Should delete entity"() {
-        given:
-        sut.save(testEntity)
-        sut.count() == 0
-
-        when:
-        sut.delete(1)
-
-        then:
-        sut.count() == 0
-    }
-
-    def "Should delete all entities"() {
-        given:
-        sut.saveAll(createMultipleTestEntities(3))
-        sut.count() == 3
-
-        when:
-        sut.deleteAll()
-
-        then:
-        sut.count() == 0
-    }
-
     List<TestIdentifiableEntity> createMultipleTestEntities(int count) {
         def entities = [] as List
         1.upto(count, {
