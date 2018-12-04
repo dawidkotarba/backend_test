@@ -5,7 +5,6 @@ import com.dawidkotarba.backendtest.repository.Repository
 import groovy.json.JsonBuilder
 import io.micronaut.context.ApplicationContext
 import io.micronaut.http.HttpRequest
-import io.micronaut.http.HttpResponse
 import io.micronaut.http.client.HttpClient
 import io.micronaut.inject.qualifiers.Qualifiers
 import io.micronaut.runtime.server.EmbeddedServer
@@ -15,6 +14,8 @@ import spock.lang.Shared
 import spock.lang.Specification
 
 class TransferControllerSpec extends Specification {
+
+    def FIRST_TRANSFER_REQUEST_SEQUENCE_ID = 1L
 
     @Shared
     @AutoCleanup
@@ -38,10 +39,10 @@ class TransferControllerSpec extends Specification {
         def requestBody = createRequestBody(1L, 2L, BigDecimal.TEN)
 
         when:
-        HttpResponse response = client.toBlocking().exchange(HttpRequest.POST("/api/transfer", requestBody));
+        def response = client.toBlocking().retrieve(HttpRequest.POST("/api/transfer", requestBody));
 
         then:
-        response.getStatus().getCode() == 200
+        response == FIRST_TRANSFER_REQUEST_SEQUENCE_ID as String
     }
 
     def createRequestBody(long testSenderAccountId, long tesReceiverAccountId, BigDecimal testAmount) {
