@@ -3,7 +3,8 @@ package com.dawidkotarba.backendtest.service.impl;
 import com.dawidkotarba.backendtest.domain.account.Account;
 import com.dawidkotarba.backendtest.domain.transfer.TransferRequest;
 import com.dawidkotarba.backendtest.domain.transfer.TransferStatus;
-import com.dawidkotarba.backendtest.exception.impl.InvalidRequestException;
+import com.dawidkotarba.backendtest.exception.impl.AccountNotFoundException;
+import com.dawidkotarba.backendtest.exception.impl.InsufficientAmountException;
 import com.dawidkotarba.backendtest.repository.Repository;
 import com.dawidkotarba.backendtest.service.TransferService;
 import com.dawidkotarba.backendtest.service.validator.Validator;
@@ -34,10 +35,12 @@ class DefaultTransferService implements TransferService {
         requestValidator.validate(transferRequest);
 
         final Long senderAccountId = transferRequest.getSenderAccountId();
-        final Account senderAccount = accountRepository.find(senderAccountId).orElseThrow(() -> new InvalidRequestException("Sender's account cannot be found."));
+        final Account senderAccount = accountRepository.find(senderAccountId)
+                .orElseThrow(() -> new AccountNotFoundException("Sender's account [ " + senderAccountId + "] cannot be found."));
 
         final Long receiverAccountId = transferRequest.getReceiverAccountId();
-        final Account receiverAccount = accountRepository.find(receiverAccountId).orElseThrow(() -> new InvalidRequestException("Receiver's account cannot be found."));
+        final Account receiverAccount = accountRepository.find(receiverAccountId)
+                .orElseThrow(() -> new AccountNotFoundException("Receiver's account [" + receiverAccountId + "] cannot be found."));
 
         final BigDecimal transferAmount = transferRequest.getAmount();
 
@@ -47,15 +50,17 @@ class DefaultTransferService implements TransferService {
         synchronized (senderAccount) {
             if (senderAccount.isAmountAvailable(transferAmount)) {
                 senderAccount.add(transferAmount.negate());
+                accountRepository.save(senderAccount);
                 transferRepository.save(transferRequest.withStatus(TransferStatus.AMOUNT_SUBTRACTED_FROM_SENDER));
             } else {
                 transferRepository.save(transferRequest.withStatus(TransferStatus.INSUFFICIENT_AMOUNT));
-                throw new InvalidRequestException("Insufficient amount"); // TODO: 03.12.18 more biz exception here
+                throw new InsufficientAmountException("Sender [" + senderAccountId + "] does not have a sufficient amount to transfer.");
             }
         }
 
         // optimistic for transfer amount addition
         receiverAccount.add(transferAmount);
+        accountRepository.save(receiverAccount);
         transferRepository.save(transferRequest.withStatus(TransferStatus.SUCCESS));
     }
 }

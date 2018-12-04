@@ -10,8 +10,10 @@ import io.micronaut.validation.Validated;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import static com.dawidkotarba.backendtest.constants.Constants.REST_API_PREFIX;
+
 @Validated
-@Controller("/api")
+@Controller(REST_API_PREFIX)
 class TransferController {
 
     private final TransferFacade transferFacade;

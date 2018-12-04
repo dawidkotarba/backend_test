@@ -5,7 +5,6 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-// TODO: 02.12.18 validated
 public class TransferRequestDto {
 
     @NotNull(message = "Sender account ID cannot be null")

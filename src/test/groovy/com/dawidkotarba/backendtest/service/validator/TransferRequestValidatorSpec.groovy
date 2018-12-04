@@ -8,13 +8,8 @@ import spock.lang.Specification
 
 class TransferRequestValidatorSpec extends Specification {
 
-    TransferConfiguration configuration;
-    TransferRequestValidator sut;
-
-    def setup() {
-        configuration = new TransferConfiguration()
-        sut = new TransferRequestValidator(configuration)
-    }
+    def configuration = new TransferConfiguration()
+    def sut = new TransferRequestValidator(configuration)
 
     def "Should validate transfer request"() {
         when:

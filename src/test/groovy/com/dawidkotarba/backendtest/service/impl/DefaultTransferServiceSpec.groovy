@@ -2,45 +2,29 @@ package com.dawidkotarba.backendtest.service.impl
 
 import com.dawidkotarba.backendtest.domain.account.Account
 import com.dawidkotarba.backendtest.domain.transfer.TransferRequest
+import com.dawidkotarba.backendtest.exception.impl.AccountNotFoundException
+import com.dawidkotarba.backendtest.exception.impl.InsufficientAmountException
 import com.dawidkotarba.backendtest.exception.impl.InvalidRequestException
 import com.dawidkotarba.backendtest.repository.Repository
-import com.dawidkotarba.backendtest.service.TransferService
 import com.dawidkotarba.backendtest.service.validator.Validator
 import spock.lang.Specification
 
 class DefaultTransferServiceSpec extends Specification {
 
-    Repository<Account> accountRepository
-    Repository<TransferRequest> transferRepository
-    Validator requestValidator
+    def accountRepository = accountRepository = Mock(Repository)
+    def transferRepository = Mock(Repository)
+    def requestValidator = Mock(Validator)
+    def sut = new DefaultTransferService(accountRepository, transferRepository, requestValidator)
 
-    TransferService sut
+    def senderAccountId = 1L
+    def receiverAccountId = 2L
+    def defaultBalance = BigDecimal.TEN
 
-    long senderAccountId
-    long receiverAccountId
-    BigDecimal defaultBalance
-
-    Account senderAccount
-    Account receiverAccount
+    def senderAccount = new Account().withBalance(defaultBalance)
+    def receiverAccount = new Account().withBalance(defaultBalance)
 
     def setup() {
-        accountRepository = Mock(Repository)
-        transferRepository = Mock(Repository)
-        requestValidator = Mock(Validator)
-        sut = new DefaultTransferService(accountRepository, transferRepository, requestValidator)
-
-        setupAccounts()
-    }
-
-    def setupAccounts() {
-        senderAccountId = 1L
-        receiverAccountId = 2L
-        defaultBalance = BigDecimal.TEN
-
-        senderAccount = new Account().withBalance(defaultBalance)
         senderAccount.setId(senderAccountId)
-
-        receiverAccount = new Account().withBalance(defaultBalance)
         receiverAccount.setId(senderAccountId)
     }
 
@@ -68,7 +52,7 @@ class DefaultTransferServiceSpec extends Specification {
         sut.transfer(transferRequest)
 
         then:
-        thrown InvalidRequestException
+        thrown AccountNotFoundException
     }
 
     def "Should throw exception when receiver's account cannot be found"() {
@@ -82,7 +66,7 @@ class DefaultTransferServiceSpec extends Specification {
         sut.transfer(transferRequest)
 
         then:
-        thrown InvalidRequestException
+        thrown AccountNotFoundException
     }
 
     def "Should throw an exception when insufficient amount for a transfer"() {
@@ -96,7 +80,7 @@ class DefaultTransferServiceSpec extends Specification {
         sut.transfer(transferRequest)
 
         then:
-        thrown InvalidRequestException
+        thrown InsufficientAmountException
     }
 
     def "Should not throw an exception when insufficient amount for a transfer"() {

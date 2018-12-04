@@ -3,14 +3,14 @@ package com.dawidkotarba.backendtest.exception.impl;
 import com.dawidkotarba.backendtest.exception.AbstractApplicationRuntimeException;
 import com.dawidkotarba.backendtest.exception.ExceptionType;
 
-public class InvalidRequestException extends AbstractApplicationRuntimeException {
+public class InsufficientAmountException extends AbstractApplicationRuntimeException {
 
-    public InvalidRequestException(final String message) {
+    public InsufficientAmountException(final String message) {
         super(message);
     }
 
     @Override
     protected ExceptionType getExceptionType() {
-        return ExceptionType.INVALID_REQUEST;
+        return ExceptionType.INTERNL_SERVER_ERROR;
     }
 }
