@@ -1,14 +1,12 @@
 package com.dawidkotarba.backendtest.db.impl
 
-import com.dawidkotarba.backendtest.configuration.DataStoreConfiguration
 import com.dawidkotarba.backendtest.infrastructure.db.impl.InMemoryDataStore
 import com.dawidkotarba.backendtest.testdata.TestIdentifiableEntity
 import spock.lang.Specification
 
 class InMemoryDataStoreSpec extends Specification {
 
-    def config = new DataStoreConfiguration()
-    def sut = new InMemoryDataStore(config)
+    def sut = new InMemoryDataStore()
     def testEntity = new TestIdentifiableEntity()
 
     def "Should create entity"() {

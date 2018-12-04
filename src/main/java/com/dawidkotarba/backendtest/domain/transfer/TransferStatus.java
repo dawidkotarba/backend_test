@@ -4,5 +4,5 @@ public enum TransferStatus {
     STARTED,
     INSUFFICIENT_AMOUNT,
     AMOUNT_SUBTRACTED_FROM_SENDER,
-    SUCCESS
+    TRANSFERRED
 }

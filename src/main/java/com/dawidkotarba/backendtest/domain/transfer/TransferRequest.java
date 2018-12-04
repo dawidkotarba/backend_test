@@ -84,7 +84,9 @@ public class TransferRequest extends Identifiable {
                 + "senderAccountId=" + senderAccountId
                 + ", receiverAccountId=" + receiverAccountId
                 + ", amount=" + amount
-                + ", title='" + title + '\''
+                + ", title='" + title
+                + ", status = " + status
+                + ", timestamp=" + timestamp
                 + "} " + super.toString();
     }
 }

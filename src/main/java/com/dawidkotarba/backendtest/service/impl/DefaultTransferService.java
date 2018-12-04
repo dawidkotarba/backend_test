@@ -61,6 +61,6 @@ class DefaultTransferService implements TransferService {
         // optimistic for transfer amount addition
         receiverAccount.add(transferAmount);
         accountRepository.save(receiverAccount);
-        transferRepository.save(transferRequest.withStatus(TransferStatus.SUCCESS));
+        transferRepository.save(transferRequest.withStatus(TransferStatus.TRANSFERRED));
     }
 }

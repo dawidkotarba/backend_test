@@ -1,13 +1,9 @@
 package com.dawidkotarba.backendtest.infrastructure.db.impl;
 
-import com.dawidkotarba.backendtest.configuration.DataStoreConfiguration;
 import com.dawidkotarba.backendtest.domain.Identifiable;
 import com.dawidkotarba.backendtest.infrastructure.db.DataStore;
 import io.micronaut.context.annotation.Prototype;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -16,27 +12,14 @@ import java.util.stream.Collectors;
 
 @Prototype
 class InMemoryDataStore<T extends Identifiable> implements DataStore<T> {
-    private static final Logger LOG = LoggerFactory.getLogger(InMemoryDataStore.class);
-
     private static final int SEQ_INITIAL_VALUE = 0;
     private final ConcurrentHashMap<Long, T> data = new ConcurrentHashMap<>();
     private final AtomicLong sequence = new AtomicLong(SEQ_INITIAL_VALUE);
-    private final DataStoreConfiguration configuration;
-
-    @Inject
-    public InMemoryDataStore(final DataStoreConfiguration configuration) {
-        this.configuration = configuration;
-    }
 
     @Override
     public T save(final T entity) {
         setIdFromSequenceIfEmpty(entity);
         data.put(entity.getId(), entity);
-
-        if (configuration.isPrintOnSave()) {
-            LOG.info(entity.toString());
-        }
-
         return entity;
     }
 
