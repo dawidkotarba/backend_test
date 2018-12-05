@@ -2,7 +2,9 @@ package com.dawidkotarba.backendtest.controller;
 
 
 import com.dawidkotarba.backendtest.dto.TransferRequestDto;
+import com.dawidkotarba.backendtest.dto.TransferResponseDto;
 import com.dawidkotarba.backendtest.facade.TransferFacade;
+import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.validation.Validated;
@@ -24,7 +26,8 @@ class TransferController {
     }
 
     @Post("/transfer")
-    public Long transferAmount(@Valid final TransferRequestDto request) {
-        return transferFacade.transfer(request);
+    public HttpResponse<TransferResponseDto> transferAmount(@Valid final TransferRequestDto request) {
+        final TransferResponseDto transferResponseDto = transferFacade.transfer(request);
+        return HttpResponse.ok(transferResponseDto);
     }
 }
