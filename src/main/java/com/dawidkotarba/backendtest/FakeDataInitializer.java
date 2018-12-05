@@ -16,7 +16,7 @@ public class FakeDataInitializer {
 
     private static final Logger LOG = LoggerFactory.getLogger(FakeDataInitializer.class);
     private static final int FAKE_ACCOUNTS_COUNT = 5;
-    private static final BigDecimal FAKE_ACCOUNTS_BALANCE = BigDecimal.valueOf(100);
+    private static final BigDecimal FAKE_ACCOUNTS_BALANCE = BigDecimal.valueOf(1000);
 
     private final Repository<Account> accountRepository;
 
