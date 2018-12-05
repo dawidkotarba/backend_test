@@ -16,7 +16,7 @@ import javax.inject.Singleton;
 public class InvalidRequestExceptionHandler implements ExceptionHandler<InvalidRequestException, HttpResponse> {
 
     @Override
-    public HttpResponse handle(final HttpRequest request, final InvalidRequestException exception) {
+    public HttpResponse<ApplicationRuntimeExceptionResponse> handle(final HttpRequest request, final InvalidRequestException exception) {
         final ApplicationRuntimeExceptionResponse response = new ApplicationRuntimeExceptionResponse(exception);
         return HttpResponse.badRequest(response);
     }

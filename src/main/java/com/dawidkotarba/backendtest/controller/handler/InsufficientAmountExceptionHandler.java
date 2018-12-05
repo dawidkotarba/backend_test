@@ -15,7 +15,7 @@ import javax.inject.Singleton;
 @Requires(classes = {InsufficientAmountException.class, ExceptionHandler.class})
 public class InsufficientAmountExceptionHandler implements ExceptionHandler<InsufficientAmountException, HttpResponse> {
     @Override
-    public HttpResponse handle(final HttpRequest request, final InsufficientAmountException exception) {
+    public HttpResponse<ApplicationRuntimeExceptionResponse> handle(final HttpRequest request, final InsufficientAmountException exception) {
         final ApplicationRuntimeExceptionResponse response = new ApplicationRuntimeExceptionResponse(exception);
         return HttpResponse.badRequest(response);
     }

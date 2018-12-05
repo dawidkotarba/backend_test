@@ -16,7 +16,7 @@ import javax.inject.Singleton;
 public class ApplicationExceptionHandler implements ExceptionHandler<AbstractApplicationRuntimeException, HttpResponse> {
 
     @Override
-    public HttpResponse handle(final HttpRequest request, final AbstractApplicationRuntimeException exception) {
+    public HttpResponse<ApplicationRuntimeExceptionResponse> handle(final HttpRequest request, final AbstractApplicationRuntimeException exception) {
         final ApplicationRuntimeExceptionResponse response = new ApplicationRuntimeExceptionResponse(exception);
         return HttpResponse.serverError(response);
     }

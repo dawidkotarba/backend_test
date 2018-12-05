@@ -15,7 +15,7 @@ import javax.inject.Singleton;
 @Requires(classes = {AccountNotFoundException.class, ExceptionHandler.class})
 public class AccountNotFoundExceptionHandler implements ExceptionHandler<AccountNotFoundException, HttpResponse> {
     @Override
-    public HttpResponse handle(final HttpRequest request, final AccountNotFoundException exception) {
+    public HttpResponse<ApplicationRuntimeExceptionResponse> handle(final HttpRequest request, final AccountNotFoundException exception) {
         final ApplicationRuntimeExceptionResponse response = new ApplicationRuntimeExceptionResponse(exception);
         return HttpResponse.badRequest(response);
     }
