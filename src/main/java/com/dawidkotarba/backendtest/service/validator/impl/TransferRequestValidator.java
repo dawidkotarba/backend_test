@@ -37,6 +37,10 @@ public class TransferRequestValidator implements Validator<TransferRequest> {
             throw new InvalidRequestException("Invalid account(s) specified.");
         }
 
+        if (request.getSenderAccountId().equals(request.getReceiverAccountId())) {
+            throw new InvalidRequestException("The same account specified for sender and receiver.");
+        }
+
         if (!validateTransferAmount(request.getAmount())) {
             throw new InvalidRequestException("Invalid transfer amount.");
         }
