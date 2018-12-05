@@ -3,8 +3,7 @@ package com.dawidkotarba.backendtest.exception;
 public enum ExceptionType {
     INVALID_REQUEST("The transfer request is invalid."),
     ACCOUNT_NOT_FOUND("Specified account does not exist."),
-    INSUFFICIENT_AMOUNT("Insufficient amount to transfer"),
-    INTERNL_SERVER_ERROR("The transfer request cannot be currently processed.");
+    INSUFFICIENT_AMOUNT("Insufficient amount to transfer");
 
     private final String message;
 

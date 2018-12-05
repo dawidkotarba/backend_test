@@ -11,6 +11,6 @@ public class InsufficientAmountException extends AbstractApplicationRuntimeExcep
 
     @Override
     protected ExceptionType getExceptionType() {
-        return ExceptionType.INTERNL_SERVER_ERROR;
+        return ExceptionType.INSUFFICIENT_AMOUNT;
     }
 }
