@@ -9,7 +9,6 @@ import io.micronaut.core.util.StringUtils;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -37,10 +36,6 @@ public class TransferRequestValidator implements Validator<TransferRequest> {
             throw new InvalidRequestException("Invalid account(s) specified.");
         }
 
-        if (request.getSenderAccountId().equals(request.getReceiverAccountId())) {
-            throw new InvalidRequestException("The same account specified for sender and receiver.");
-        }
-
         if (!validateTransferAmount(request.getAmount())) {
             throw new InvalidRequestException("Invalid transfer amount.");
         }
@@ -50,8 +45,9 @@ public class TransferRequestValidator implements Validator<TransferRequest> {
         }
     }
 
-    private boolean validateAccountIds(final Long... accountIds) {
-        return Arrays.stream(accountIds).allMatch(account -> account > 0);
+    private boolean validateAccountIds(final Long senderAccountId, final Long receiverAccountId) {
+        return Stream.of(senderAccountId, receiverAccountId).allMatch(account -> account > 0)
+                && !senderAccountId.equals(receiverAccountId);
     }
 
     private boolean validateTransferAmount(final BigDecimal transferAmount) {
