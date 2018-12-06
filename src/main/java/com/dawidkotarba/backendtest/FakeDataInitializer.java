@@ -11,6 +11,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.math.BigDecimal;
 
+/**
+ * This class inserts several fake accounts with initial balance for JMeter testing purpose.
+ * It can be safely removed.
+ */
 @Context
 public class FakeDataInitializer {
 

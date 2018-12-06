@@ -6,6 +6,9 @@ import com.dawidkotarba.backendtest.infrastructure.db.DataStore;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+/**
+ * This repository allows to manipulate {@link TransferRequest} model.
+ */
 @Singleton
 class TransferRepository extends AbstractRepository<TransferRequest> {
 

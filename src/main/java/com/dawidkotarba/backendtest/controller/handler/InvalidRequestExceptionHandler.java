@@ -10,6 +10,9 @@ import io.micronaut.http.server.exceptions.ExceptionHandler;
 
 import javax.inject.Singleton;
 
+/**
+ * This handler helps to get the pretty formatted response when {@link InvalidRequestException} is thrown.
+ */
 @Produces
 @Singleton
 @Requires(classes = {InvalidRequestException.class, ExceptionHandler.class})

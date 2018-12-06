@@ -11,6 +11,10 @@ import com.dawidkotarba.backendtest.service.TransferService;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+/**
+ * This facade servers as a layer between controller and services.
+ * It provides an abstraction between domain logic and model as well as performs necessary data conversion.
+ */
 @Singleton
 class DefaultTransferFacade implements TransferFacade {
 

@@ -10,6 +10,9 @@ import io.micronaut.http.server.exceptions.ExceptionHandler;
 
 import javax.inject.Singleton;
 
+/**
+ * This generic handler helps to get the pretty formatted response when {@link AbstractApplicationRuntimeException} is thrown.
+ */
 @Produces
 @Singleton
 @Requires(classes = {AbstractApplicationRuntimeException.class, ExceptionHandler.class})

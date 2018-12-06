@@ -8,6 +8,12 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
+/**
+ * This abstract repository can contain methods that allow to manipulate types
+ * which extend {@link Identifiable} class.
+ *
+ * @param <T> the model class that extends {@link Identifiable}
+ */
 abstract class AbstractRepository<T extends Identifiable> implements Repository<T> {
 
     private static final Logger LOG = LoggerFactory.getLogger(AbstractRepository.class);

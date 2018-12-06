@@ -3,8 +3,6 @@
 [![codebeat badge](https://codebeat.co/badges/47ebdf95-528a-45a7-b84a-be42416cb430)](https://codebeat.co/projects/github-com-dawidkotarba-backend_test-master)
 # Backend Test
 
-Work in progress, please do not consider this as done.
-
 The implementation of tasks to transfer money between two accounts.
 The ~70% of test code coverage is a result of a high ratio of model classes' code comparing to the business logic.
 

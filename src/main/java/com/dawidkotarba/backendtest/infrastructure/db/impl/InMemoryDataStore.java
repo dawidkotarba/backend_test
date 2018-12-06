@@ -10,6 +10,15 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
+/**
+ * As specified in requirements, this in-memory data store can be used to persist
+ * entities. It allows to operate on entities that extend {@link Identifiable} class.
+ * The sequence generation is done by using atomic long that guarantees a thread safety.
+ * Additionally, a double-locking approach is used to persist the ID of the entity without
+ * the unnecessary overhead of synchronization.
+ *
+ * @param <T>
+ */
 @Prototype
 class InMemoryDataStore<T extends Identifiable> implements DataStore<T> {
     private static final int SEQ_INITIAL_VALUE = 0;

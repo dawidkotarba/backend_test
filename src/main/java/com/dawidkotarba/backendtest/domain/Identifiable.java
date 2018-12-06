@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * This class servers as a basis for entities allowing them to be
+ * identified by both ID (assigned by the data store) and UUID
+ * from the early beginning (used also to calculate the hashcode).
+ */
 public class Identifiable implements Serializable {
 
     private Long id;

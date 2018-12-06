@@ -14,6 +14,9 @@ import javax.validation.Valid;
 
 import static com.dawidkotarba.backendtest.constants.Constants.REST_API_PREFIX;
 
+/**
+ * This is the main and single controller in the application.
+ */
 @Validated
 @Controller(REST_API_PREFIX)
 class TransferController {

@@ -14,6 +14,9 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 import java.math.BigDecimal;
 
+/**
+ * This service contains the main logic in the application to safely transfer the money between two accounts.
+ */
 @Singleton
 class DefaultTransferService implements TransferService {
 
@@ -30,6 +33,15 @@ class DefaultTransferService implements TransferService {
         this.requestValidator = requestValidator;
     }
 
+    /**
+     * This method performs a transfer from a sender's account to receiver's one.
+     * As in-memory data store is used, it uses locking to guarantee the safety of the operation.
+     * A pessimistic approach is used to subtract the amount from sender's account and optimistic one to add that to receiver's account.
+     *
+     * @param transferRequest the transfer request model that contains all fields required to perform the transaction.
+     *                        It is used also for a tracking/auditing purpose by {@link com.dawidkotarba.backendtest.repository.impl.TransferRepository}
+     * @return the reference transaction ID
+     */
     @Override
     public Long transfer(final TransferRequest transferRequest) {
         requestValidator.validate(transferRequest);

@@ -6,6 +6,9 @@ import com.dawidkotarba.backendtest.infrastructure.db.DataStore;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+/**
+ * This repository allows to manipulate {@link Account} model.
+ */
 @Singleton
 class AccountRepository extends AbstractRepository<Account> {
 

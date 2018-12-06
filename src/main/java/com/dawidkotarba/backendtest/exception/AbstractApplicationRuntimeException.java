@@ -2,6 +2,10 @@ package com.dawidkotarba.backendtest.exception;
 
 import java.util.UUID;
 
+/**
+ * This class allows to generate the unique identifier that can be later on used to track down
+ * particular issues.
+ */
 public abstract class AbstractApplicationRuntimeException extends RuntimeException {
 
     private UUID uuid;
