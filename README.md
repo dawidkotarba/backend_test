@@ -15,7 +15,7 @@ The ~70% of test code coverage is a result of a high ratio of model classes' cod
 - Checkstyle: code style analysis
 - Jacoco + Coveralls: code coverage
 - Codebeat: static analysis
-- JMeter: check deadlocks (backend_test_deadlock_check.jmx file)
+- JMeter: check deadlocks (scripts in jmeter_scripts folder)
 
 #### Tests and run:
 ```bash
