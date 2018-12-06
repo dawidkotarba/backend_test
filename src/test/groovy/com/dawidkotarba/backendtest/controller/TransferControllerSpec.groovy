@@ -1,5 +1,6 @@
 package com.dawidkotarba.backendtest.controller
 
+import com.dawidkotarba.backendtest.configuration.TransferConfiguration
 import com.dawidkotarba.backendtest.domain.account.Account
 import com.dawidkotarba.backendtest.dto.TransferResponseDto
 import com.dawidkotarba.backendtest.repository.Repository
@@ -33,6 +34,8 @@ class TransferControllerSpec extends Specification {
 
     @Shared
     def accountRepository = embeddedServer.applicationContext.getBean(Repository, Qualifiers.byName("accountRepository"))
+
+    def transferConfiguration = new TransferConfiguration()
 
     @Shared
     Long senderAccountId
@@ -88,11 +91,11 @@ class TransferControllerSpec extends Specification {
         receiverAccount.get().getBalance() == TransferControllerSpec.RECEIVER_INITIAL_BALANCE + transferAmount
     }
 
-    def "Summed account balance should remain same after a successful transaction"() {
+    def "Total account balance should remain same after a successful transaction"() {
         given:
         def senderAccount = accountRepository.find(senderAccountId) as Optional<Account>
         def receiverAccount = accountRepository.find(receiverAccountId) as Optional<Account>
-        def summedAmount = senderAccount.get().getBalance() + receiverAccount.get().getBalance()
+        def totalAmount = senderAccount.get().getBalance() + receiverAccount.get().getBalance()
         def transferAmount = BigDecimal.ONE
         def requestBody = createRequestBody(senderAccountId, receiverAccountId, transferAmount)
 
@@ -100,10 +103,32 @@ class TransferControllerSpec extends Specification {
         client.toBlocking().retrieve(HttpRequest.POST(TransferControllerSpec.TRANSFER_URL, requestBody))
         senderAccount = accountRepository.find(senderAccountId) as Optional<Account>
         receiverAccount = accountRepository.find(receiverAccountId) as Optional<Account>
-        def summedAmountAfterTransfer = senderAccount.get().getBalance() + receiverAccount.get().getBalance()
+        def totalAmountAfterTransfer = senderAccount.get().getBalance() + receiverAccount.get().getBalance()
 
         then:
-        summedAmount == summedAmountAfterTransfer
+        totalAmount == totalAmountAfterTransfer
+    }
+
+    def "Should transfer minimal amount successfully"() {
+        given:
+        def senderAccount = accountRepository.find(senderAccountId) as Optional<Account>
+        def receiverAccount = accountRepository.find(receiverAccountId) as Optional<Account>
+        def initialSendersBalance = senderAccount.get().getBalance()
+        def initialReceiversBalance = receiverAccount.get().getBalance()
+        def transferAmount = BigDecimal.valueOf(0.01D).setScale(transferConfiguration.scale)
+        def requestBody = createRequestBody(senderAccountId, receiverAccountId, transferAmount)
+
+        when:
+        client.toBlocking().retrieve(HttpRequest.POST(TransferControllerSpec.TRANSFER_URL, requestBody))
+        senderAccount = accountRepository.find(senderAccountId) as Optional<Account>
+        receiverAccount = accountRepository.find(receiverAccountId) as Optional<Account>
+        def newSendersBalance = senderAccount.get().getBalance()
+        def newReceiversBalance = receiverAccount.get().getBalance()
+
+        then:
+        newSendersBalance == initialSendersBalance.subtract(transferAmount)
+        and:
+        newReceiversBalance == initialReceiversBalance.add(transferAmount)
     }
 
     def "Should throw exception response when transfer request amount is higher that sender balance"() {
@@ -146,7 +171,7 @@ class TransferControllerSpec extends Specification {
                 {
                     senderAccountId testSenderAccountId
                     receiverAccountId tesReceiverAccountId
-                    amount testAmount
+                    amount testAmount.toString()
                     title "Test title"
                 }
         )
